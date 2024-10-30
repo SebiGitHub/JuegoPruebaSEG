@@ -1,6 +1,8 @@
 import pygame
 import sys
 
+import GameState
+
 # Inicialización de Pygame
 pygame.init()
 
@@ -15,11 +17,7 @@ BLACK = (0, 0, 0)
 font_name = "Fuente.ttf"
 font = pygame.font.Font(font_name, 70)
 
-# Estados del juego
-class GameState:
-    MENU = 1
-    TRIVIA = 2
-    NARRATIVE = 3
+
 
 # Clase principal del juego
 class Game:
@@ -64,5 +62,3 @@ class Game:
                 if event.key == pygame.K_SPACE:
                     # Cambiar de estado con la barra espaciadora como ejemplo
                     self.state = GameState.TRIVIA if self.state == GameState.MENU else GameState.NARRATIVE
-
-
