@@ -1,6 +1,6 @@
 # Inicia el juego
-from Game import Game
+from Vista import Vista
 
-if __name__ == "__main__":
-    game = Game()
-    game.run()
+#if __name__ == "__main__":
+    #vista = Vista()
+    #vista.run()
