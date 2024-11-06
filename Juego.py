@@ -1,7 +1,7 @@
 import pygame
 import sys
 import random
-from words import *
+from Palabras import *
 
 pygame.init()
 
@@ -23,7 +23,7 @@ OUTLINE = "#d3d6da"
 FILLED_OUTLINE = "#878a8c"
 
 #Palabra con la que jugar
-CORRECT_WORD = "focal"
+CORRECT_WORD = random.choice(PALABRAS)
 
 ALPHABET = ["QWERTYUIOP", "ASDFGHJKL", "ZXCVBNM"]
 
@@ -181,12 +181,11 @@ def play_again():
 
 
 def reset():
-    # Resets all global variables to their default states.
     global guesses_count, CORRECT_WORD, guesses, current_guess, current_guess_string, game_result
     SCREEN.fill("white")
     SCREEN.blit(BACKGROUND, BACKGROUND_RECT)
     guesses_count = 0
-    CORRECT_WORD = random.choice(WORDS)
+    CORRECT_WORD = random.choice(PALABRAS)  # Palabra aleatoria
     guesses = [[]] * 6
     current_guess = []
     current_guess_string = ""
@@ -232,7 +231,7 @@ while True:
                 if game_result != "":
                     reset()
                 else:
-                    if len(current_guess_string) == 5 and current_guess_string.lower() in WORDS:
+                    if len(current_guess_string) == 5 and current_guess_string.lower() in PALABRAS:
                         check_guess(current_guess)
             elif event.key == pygame.K_BACKSPACE:
                 if len(current_guess_string) > 0:
