@@ -20,13 +20,13 @@ FILLED_OUTLINE = "#878a8c"
 
 # Fuentes
 GUESSED_LETTER_FONT = pygame.font.Font("assets/FreeSansBold.otf", 50)
-AVAILABLE_LETTER_FONT = pygame.font.Font("assets/FreeSansBold.otf", 25)
+AVAILABLE_LETTER_FONT = pygame.font.Font("assets/FreeSansBold.otf", 35)
 
 # Palabras posibles
 PALABRAS = ["SECRE", "MUNDO", "HOLA", "PYTHON", "JUEGO"]
 
 # Palabra a adivinar (de la lista)
-CORRECT_WORD = random.choice(PALABRAS)
+PALABRA_CORRECTA = random.choice(PALABRAS)
 
 
 ESP_LETRA_X = 85
