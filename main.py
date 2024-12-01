@@ -1,6 +1,12 @@
-# Inicia el juego
-from Vista import Vista
+import pygame
+import sys
+from Juego import Juego
 
-#if __name__ == "__main__":
-    #vista = Vista()
-    #vista.run()
+pygame.init()
+
+def main():
+    juego = Juego()
+    juego.run()
+
+if __name__ == "__main__":
+    main()

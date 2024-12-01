@@ -1,9 +1,32 @@
 import pygame
 import sys
 import random
+
+from Indicator import Indicator
+from Letter import Letter
 from Palabras import *
 
 pygame.init()
+
+class Juego:
+    def __init__(self):
+        # Inicialización de variables, configuración de pantalla, etc.
+        pygame.init()
+        self.WIDTH, self.HEIGHT = 633, 900
+        self.SCREEN = pygame.display.set_mode((self.WIDTH, self.HEIGHT))
+        # Aquí otras inicializaciones necesarias para el juego.
+
+    def run(self):
+        # Metodo principal para ejecutar el juego
+        running = True
+        while running:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    running = False
+            self.SCREEN.fill((255, 255, 255))  # Rellenar pantalla de blanco
+            pygame.display.update()
+
+        pygame.quit()
 
 # Constants
 WIDTH, HEIGHT = 633, 900
@@ -27,8 +50,8 @@ CORRECT_WORD = random.choice(PALABRAS)
 
 ALPHABET = ["QWERTYUIOP", "ASDFGHJKL", "ZXCVBNM"]
 
-GUESSED_LETTER_FONT = pygame.font.Font("FreeSansBold.otf", 50)
-AVAILABLE_LETTER_FONT = pygame.font.Font("FreeSansBold.otf", 25)
+GUESSED_LETTER_FONT = pygame.font.Font("assets/FreeSansBold.otf", 50)
+AVAILABLE_LETTER_FONT = pygame.font.Font("assets/FreeSansBold.otf", 25)
 
 SCREEN.fill("white")
 SCREEN.blit(BACKGROUND, BACKGROUND_RECT)
@@ -56,52 +79,6 @@ indicators = []
 game_result = ""
 
 
-class Letter:
-    def __init__(self, text, bg_position):
-        # Initializes all the variables, including text, color, position, size, etc.
-        self.bg_color = "white"
-        self.text_color = "black"
-        self.bg_position = bg_position
-        self.bg_x = bg_position[0]
-        self.bg_y = bg_position[1]
-        self.bg_rect = (bg_position[0], self.bg_y, LETTER_SIZE, LETTER_SIZE)
-        self.text = text
-        self.text_position = (self.bg_x + 36, self.bg_position[1] + 34)
-        self.text_surface = GUESSED_LETTER_FONT.render(self.text, True, self.text_color)
-        self.text_rect = self.text_surface.get_rect(center=self.text_position)
-
-    def draw(self):
-        # Puts the letter and text on the screen at the desired positions.
-        pygame.draw.rect(SCREEN, self.bg_color, self.bg_rect)
-        if self.bg_color == "white":
-            pygame.draw.rect(SCREEN, FILLED_OUTLINE, self.bg_rect, 3)
-        self.text_surface = GUESSED_LETTER_FONT.render(self.text, True, self.text_color)
-        SCREEN.blit(self.text_surface, self.text_rect)
-        pygame.display.update()
-
-    def delete(self):
-        # Fills the letter's spot with the default square, emptying it.
-        pygame.draw.rect(SCREEN, "white", self.bg_rect)
-        pygame.draw.rect(SCREEN, OUTLINE, self.bg_rect, 3)
-        pygame.display.update()
-
-
-class Indicator:
-    def __init__(self, x, y, letter):
-        # Initializes variables such as color, size, position, and letter.
-        self.x = x
-        self.y = y
-        self.text = letter
-        self.rect = (self.x, self.y, 57, 75)
-        self.bg_color = OUTLINE
-
-    def draw(self):
-        # Puts the indicator and its text on the screen at the desired position.
-        pygame.draw.rect(SCREEN, self.bg_color, self.rect)
-        self.text_surface = AVAILABLE_LETTER_FONT.render(self.text, True, "white")
-        self.text_rect = self.text_surface.get_rect(center=(self.x + 27, self.y + 30))
-        SCREEN.blit(self.text_surface, self.text_rect)
-        pygame.display.update()
 
 
 # Drawing the indicators on the screen.
