@@ -19,7 +19,7 @@ class Letras:
         # Ajusta la posición del texto dentro del rectángulo, también hacia abajo
         self.text_position = (self.bg_x + 36, self.bg_y + 34 + 5)  # Desplaza el texto 5 píxeles hacia abajo
         # Renderiza la letra con la fuente definida en GUESSED_LETTER_FONT
-        self.text_surface = GUESSED_LETTER_FONT.render(self.text, True, self.text_color)
+        self.text_surface = LETRA_ADIVINADA_FUENTE.render(self.text, True, self.text_color)
         self.text_rect = self.text_surface.get_rect(
             center=self.text_position)  # Obtiene el rectángulo de la superficie del texto
 
@@ -30,7 +30,7 @@ class Letras:
             # Dibuja el borde del rectángulo si el fondo es blanco
             pygame.draw.rect(SCREEN, FILLED_OUTLINE, self.bg_rect, 3)
         # Vuelve a renderizar la letra con el color de texto actualizado
-        self.text_surface = GUESSED_LETTER_FONT.render(self.text, True, self.text_color)
+        self.text_surface = LETRA_ADIVINADA_FUENTE.render(self.text, True, self.text_color)
         # Dibuja la letra sobre el fondo
         SCREEN.blit(self.text_surface, self.text_rect)
         # Actualiza la pantalla para mostrar los cambios

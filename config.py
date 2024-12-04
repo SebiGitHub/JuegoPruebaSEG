@@ -19,8 +19,8 @@ OUTLINE = "#d3d6da"
 FILLED_OUTLINE = "#878a8c"
 
 # Fuentes
-GUESSED_LETTER_FONT = pygame.font.Font("assets/FreeSansBold.otf", 50)
-AVAILABLE_LETTER_FONT = pygame.font.Font("assets/FreeSansBold.otf", 35)
+LETRA_ADIVINADA_FUENTE = pygame.font.Font("assets/FreeSansBold.otf", 50)
+LETRA_DISPONIBLE_FUENTE = pygame.font.Font("assets/FreeSansBold.otf", 35)
 
 # Palabras posibles
 PALABRAS = ["SECRE", "MUNDO", "HOLA", "PYTHON", "JUEGO"]
