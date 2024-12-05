@@ -40,7 +40,7 @@ pygame.mixer.music.play(-1)  # Reproduce la música en bucle infinito
 pygame.mixer.music.set_volume(0.9)  # Ajusta el volumen de la música
 
 # Configuración de la ventana del juego
-pygame.display.set_caption("Wordle!")  # Título de la ventana
+pygame.display.set_caption("WordleESP!")  # Título de la ventana
 pygame.display.set_icon(ICON)  # Configura el ícono de la ventana
 
 # Colores usados en el juego
@@ -96,7 +96,7 @@ for i in range(3):
         indicador_x += 60  # Espaciado horizontal entre letras
     indicador_y += 100  # Espaciado vertical entre filas
     if i == 0:
-        indicador_x = 50
+        indicador_x = 20
     elif i == 1:
         indicador_x = 105
 
@@ -106,43 +106,44 @@ def comprobar_suposicion(guess_to_check):
     global current_guess, current_guess_string, contador_suposiciones, current_letter_bg_x, resultado_juego
     estado_juego = False  # Variable para evitar múltiples cambios en el estado del juego.
 
-    for i in range(5):  # Itera sobre cada letra de la suposición (asumiendo palabras de 5 letras).
-        letra_minuscula = guess_to_check[i].text.lower()  # Convierte la letra a minúscula.
+    for a in range(5):  # Itera sobre cada letra de la suposición (asumiendo palabras de 5 letras).
+        letra_minuscula = guess_to_check[a].text.lower()  # Convierte la letra a minúscula.
 
         # Verifica si la letra está en la palabra correcta.
         if letra_minuscula in PALABRA_CORRECTA:
-            if letra_minuscula == PALABRA_CORRECTA[i]:  # La letra está en la posición correcta.
-                guess_to_check[i].bg_color = VERDE  # Cambia el color de fondo a verde.
+            if letra_minuscula == PALABRA_CORRECTA[a]:  # La letra está en la posición correcta.
+                guess_to_check[a].bg_color = VERDE  # Cambia el color de fondo a verde.
+
                 # Actualiza el indicador del teclado visual.
                 for indicador in indicadores:
                     if indicador.text == letra_minuscula.upper():
                         indicador.bg_color = VERDE
                         indicador.draw()
-                guess_to_check[i].text_color = "white"
+                guess_to_check[a].text_color = "white"
                 if not estado_juego:
                     resultado_juego = "W"  # Marca el juego como ganado si todas las letras son correctas.
             else:
-                guess_to_check[i].bg_color = AMARILLO  # La letra está en la palabra, pero en una posición incorrecta.
+                guess_to_check[a].bg_color = AMARILLO  # La letra está en la palabra, pero en una posición incorrecta.
                 for indicador in indicadores:
                     if indicador.text == letra_minuscula.upper():
                         indicador.bg_color = AMARILLO
                         indicador.draw()
-                guess_to_check[i].text_color = "white"
+                guess_to_check[a].text_color = "white"
                 resultado_juego = ""
                 estado_juego = True  # Evita cambiar el estado varias veces.
         else:
             # La letra no está en la palabra.
-            guess_to_check[i].bg_color = GRIS  # Cambia el color de fondo a gris.
+            guess_to_check[a].bg_color = GRIS  # Cambia el color de fondo a gris.
             for indicador in indicadores:
                 if indicador.text == letra_minuscula.upper():
                     indicador.bg_color = GRIS
                     indicador.draw()
-            guess_to_check[i].text_color = "white"
+            guess_to_check[a].text_color = "white"
             resultado_juego = ""
             estado_juego = True
 
         # Dibuja la letra con su color actualizado.
-        guess_to_check[i].draw()
+        guess_to_check[a].draw()
         pygame.display.update()  # Actualiza la pantalla.
 
     contador_suposiciones += 1  # Incrementa el contador de suposiciones.
@@ -161,7 +162,7 @@ def jugar_otravez():
     jugar_otravez_fuente = pygame.font.Font("assets/FreeSansBold.otf", 35)
 
     # Muestra el mensaje de reinicio.
-    if (resultado_juego == "w"):
+    if resultado_juego == "W":
         # Renderiza el primer texto ("VICTORIA") en una línea
         texto_resultado = jugar_otravez_fuente.render("¡VICTORIA!", True, "green")
     else:
@@ -253,12 +254,12 @@ while True:  # Bucle infinito para mantener el juego en ejecución.
             sys.exit()  # Sale del programa.
 
         if event.type == pygame.KEYDOWN:  # Evento de presionar una tecla.
-            # Solo permite que la tecla Enter funcione cuando el juego ha terminado (modo play_again)
+            # Solo permite que la tecla Enter funcione cuando el juego ha terminado (modo jugar_otravez)
             if resultado_juego != "":
                 if event.key == pygame.K_RETURN:  # Si se presiona "Enter".
                     reset()  # Reinicia el juego si ya terminó.
             else:
-                # Si no estamos en el modo "play_again", las teclas funcionan normalmente
+                # Si no estamos en el modo "jugar_otravez", las teclas funcionan normalmente
                 if event.key == pygame.K_RETURN:  # Si se presiona "Enter".
                     if len(current_guess_string) == 5 and current_guess_string.lower() in PALABRAS:
                         comprobar_suposicion(current_guess)  # Verifica la suposición actual.
